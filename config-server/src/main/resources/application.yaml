@@ -1,0 +1,29 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        encrypt:
+          enabled: true
+        git:
+          uri: https://sincoarpriv.ccffaa.mil.ec/SINCOAR-MCSV/settings.git
+          username: ${GIT_USER}
+          password: ${GIT_PASSWORD}
+          default-label: main
+
+          clone-on-start: true
+          force-pull: true
+          skip-ssl-validation: true  # Solo si usas certificados autofirmados
+          timeout: 25
+          http:
+            sslVerify: false
+            postBuffer: 104857600  # 100MB
+
+  security:
+    user:
+      name: ${CONFIG_SERVER_USER}
+      password: ${CONFIG_SERVER_PASS}
