@@ -12,7 +12,7 @@
 	<artifactId>person-user-ms</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>person-user-ms</name>
-	<description>discovery (registry) server</description>
+	<description>Person client ms</description>
 	<url/>
 	<licenses>
 		<license/>
