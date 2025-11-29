@@ -1,0 +1,36 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        encrypt:
+          enabled: true
+        git:
+          uri: https://github.com/Christian-Paul-Ruales/configurations-prueba-tecnica-ntt-data.git
+          default-label: main
+
+          clone-on-start: true
+          force-pull: true
+          skip-ssl-validation: true  # Solo si usas certificados autofirmados
+          timeout: 25
+          http:
+            sslVerify: false
+            postBuffer: 104857600  # 100MB
+
+  security:
+    user:
+      name: ${CONFIG_SERVER_USER}
+      password: ${CONFIG_SERVER_PASS}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,refresh
+  endpoint:
+    health:
+      show-details: always
