@@ -1,6 +1,6 @@
 package ec.nttdata.transaction_account_ms.infrastructure.persistence.entities;
 
-import ec.nttdata.transaction_account_ms.infrastructure.persistence.types.AccountType;
+import ec.nttdata.transaction_account_ms.domain.constants.AccountType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

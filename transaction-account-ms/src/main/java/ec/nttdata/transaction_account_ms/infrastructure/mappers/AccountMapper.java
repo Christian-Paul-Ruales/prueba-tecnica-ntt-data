@@ -2,7 +2,7 @@ package ec.nttdata.transaction_account_ms.infrastructure.mappers;
 
 import ec.nttdata.transaction_account_ms.domain.models.Account;
 import ec.nttdata.transaction_account_ms.infrastructure.persistence.entities.AccountEntity;
-import ec.nttdata.transaction_account_ms.infrastructure.persistence.types.AccountType;
+import ec.nttdata.transaction_account_ms.domain.constants.AccountType;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;

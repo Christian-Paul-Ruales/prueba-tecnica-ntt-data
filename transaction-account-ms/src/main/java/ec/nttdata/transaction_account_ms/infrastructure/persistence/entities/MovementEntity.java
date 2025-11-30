@@ -1,6 +1,6 @@
 package ec.nttdata.transaction_account_ms.infrastructure.persistence.entities;
 
-import ec.nttdata.transaction_account_ms.infrastructure.persistence.types.TransactionType;
+import ec.nttdata.transaction_account_ms.domain.constants.MovementType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,8 +13,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "transaction")
-public class TransactionEntity {
+@Table(name = "movement")
+public class MovementEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,8 +25,8 @@ public class TransactionEntity {
     private LocalDateTime dateTime;
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 10, nullable = false)
-    private TransactionType type;
+    @Column(length = 15, nullable = false)
+    private MovementType type;
 
     @Column(nullable = false)
     private BigDecimal value;

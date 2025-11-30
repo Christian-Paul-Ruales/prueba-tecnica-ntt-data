@@ -1,8 +1,8 @@
 package ec.nttdata.transaction_account_ms.application.usecases;
 
-import ec.nttdata.transaction_account_ms.application.port.in.usecases.GetAccountUseCase;
-import ec.nttdata.transaction_account_ms.application.port.out.repositories.AccountRepository;
-import ec.nttdata.transaction_account_ms.domain.models.Account;
+import ec.nttdata.transaction_account_ms.application.port.in.usecases.GetMovementUseCase;
+import ec.nttdata.transaction_account_ms.application.port.out.repositories.MovementRepository;
+import ec.nttdata.transaction_account_ms.domain.models.Movement;
 import ec.nttdata.transaction_account_ms.domain.result.Result;
 import ec.nttdata.transaction_account_ms.domain.result.ResultError;
 import lombok.RequiredArgsConstructor;
@@ -12,13 +12,13 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-public class GetAccountsUseCaseImpl implements GetAccountUseCase {
+public class GetMovementUseCaseImpl implements GetMovementUseCase {
 
-    private final AccountRepository accountRepository;
+    private final MovementRepository movementRepository;
 
     @Override
-    public Result<Account> execute(Long id) {
-        Optional<Account> optional = accountRepository.findById(id);
+    public Result<Movement> execute(Long id) {
+        Optional<Movement> optional = movementRepository.findById(id);
 
         return optional.isPresent() ?
                 new Result.Success<>(optional.get())
