@@ -12,8 +12,8 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder(toBuilder = true)
-@Entity
 @Data
+@Entity
 @Table(name = "client")
 public class ClientEntity extends PersonEntity {
 
@@ -25,7 +25,7 @@ public class ClientEntity extends PersonEntity {
     @Column(length = 100, nullable = false)
     private String password;
 
-    @Column(length = 15, nullable = false)
+    @Column(nullable = false)
     private boolean status;
 
 }

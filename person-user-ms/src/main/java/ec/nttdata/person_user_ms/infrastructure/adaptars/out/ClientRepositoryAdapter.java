@@ -1,11 +1,10 @@
 package ec.nttdata.person_user_ms.infrastructure.adaptars.out;
 
-import ec.nttdata.person_user_ms.application.port.out.ClientRepository;
+import ec.nttdata.person_user_ms.application.port.out.repositories.ClientRepository;
 import ec.nttdata.person_user_ms.domain.models.Client;
 import ec.nttdata.person_user_ms.infrastructure.mappers.ClientMapper;
 import ec.nttdata.person_user_ms.infrastructure.persistence.entities.ClientEntity;
 import ec.nttdata.person_user_ms.infrastructure.persistence.jpa.ClientRepositoryJpa;
-import jakarta.persistence.Entity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
