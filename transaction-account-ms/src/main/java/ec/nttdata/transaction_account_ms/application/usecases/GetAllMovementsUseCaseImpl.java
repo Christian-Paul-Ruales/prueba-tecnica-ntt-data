@@ -16,7 +16,7 @@ public class GetAllMovementsUseCaseImpl implements GetAllMovementsUseCase {
     private final MovementRepository movementRepository;
 
     @Override
-    public Result<List<Movement>> execute(Long id) {
+    public Result<List<Movement>> execute() {
 
         return new Result.Success<>(movementRepository.findAll());
     }

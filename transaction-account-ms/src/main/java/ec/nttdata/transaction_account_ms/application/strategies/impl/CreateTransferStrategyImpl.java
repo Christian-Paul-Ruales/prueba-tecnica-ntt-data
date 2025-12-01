@@ -24,7 +24,7 @@ public class CreateTransferStrategyImpl implements CreateMovementStrategy {
         BigDecimal lastBalance = movementRepository
                 .findLastMovement(command.account().getId())
                 .map(Movement::getBalance)
-                .orElse(command.account().getOpeningBalance());
+                .orElseGet(() -> command.account().getOpeningBalance());
 
         if(command.movementValue().compareTo(lastBalance) > 0) {
             return new Result.Failure<>(
@@ -37,7 +37,7 @@ public class CreateTransferStrategyImpl implements CreateMovementStrategy {
                 .type(getType().getCode())
                 .value(command.movementValue())
                 .balance(presentBalance)
-                .account(command.account())
+                .account(command.account().getId())
                 .status(true)
                 .build();
 
@@ -48,6 +48,6 @@ public class CreateTransferStrategyImpl implements CreateMovementStrategy {
 
     @Override
     public MovementType getType() {
-        return MovementType.TRANSFERENCIA;
+        return MovementType.RETIRO;
     }
 }

@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public enum MovementType {
     DEPOSITO("DEPOSITO"),
-    TRANSFERENCIA("TRANSFERENCIA");
+    RETIRO("RETIRO");
 
     private final String code;
 

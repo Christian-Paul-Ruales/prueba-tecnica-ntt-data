@@ -28,7 +28,7 @@ public class CreateDepositStrategyImpl implements CreateMovementStrategy {
         BigDecimal lastBalance = movementRepository
                 .findLastMovement(command.account().getId())
                 .map(Movement::getBalance)
-                .orElse(command.account().getOpeningBalance());
+                .orElseGet(() -> command.account().getOpeningBalance());
 
         BigDecimal presentBalance = lastBalance.add(command.movementValue());
 
@@ -36,7 +36,7 @@ public class CreateDepositStrategyImpl implements CreateMovementStrategy {
                 .type(getType().getCode())
                 .value(command.movementValue())
                 .balance(presentBalance)
-                .account(command.account())
+                .account(command.account().getId())
                 .status(true)
                 .build();
 

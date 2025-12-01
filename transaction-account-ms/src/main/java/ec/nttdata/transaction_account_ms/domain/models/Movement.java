@@ -18,7 +18,7 @@ public class Movement {
     private BigDecimal value;
     private BigDecimal balance;
     private boolean status;
-    private Account account;
+    private Long account;
 
 
 

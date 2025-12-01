@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -38,6 +39,8 @@ public class AccountEntity {
     @Column(nullable = false)
     private boolean status;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "")
+    private List<MovementEntity> movements;
 
 
 }

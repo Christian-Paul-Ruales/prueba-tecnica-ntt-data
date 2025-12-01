@@ -6,5 +6,5 @@ import ec.nttdata.transaction_account_ms.domain.result.Result;
 import java.util.List;
 
 public interface GetAllMovementsUseCase {
-    Result<List<Movement>> execute(Long id);
+    Result<List<Movement>> execute();
 }

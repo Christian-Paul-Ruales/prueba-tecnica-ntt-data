@@ -9,7 +9,7 @@ import org.mapstruct.Named;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = MovementMapper.class)
 public interface AccountMapper {
     @Mapping(target = "type", source = "type", qualifiedByName = "typeToString")
     Account toDomain(AccountEntity entity);

@@ -8,6 +8,7 @@ import ec.nttdata.transaction_account_ms.infrastructure.persistence.jpa.AccountR
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,5 +50,17 @@ public class AccountRepositoryAdapter implements AccountRepository {
     @Override
     public void deleteById(Long id) {
         repositoryJpa.deleteById(id);
+    }
+
+    @Override
+    public List<Account> findByClientIdAndStatusTrue(
+            Long clientId,
+            LocalDateTime start,
+            LocalDateTime end
+    ) {
+        return repositoryJpa.findByClientIdAndStatusTrue(start, end, clientId)
+                .stream()
+                .map(mapper::toDomain)
+                .toList();
     }
 }

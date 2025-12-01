@@ -16,7 +16,7 @@ public class GetAllAccountsUseCaseImpl implements GetAllAccountsUseCase {
     private final AccountRepository accountRepository;
 
     @Override
-    public Result<List<Account>> execute(Long id) {
+    public Result<List<Account>> execute() {
 
         return new Result.Success<>(accountRepository.findAll());
     }

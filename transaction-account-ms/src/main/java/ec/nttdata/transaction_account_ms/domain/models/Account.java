@@ -3,6 +3,7 @@ package ec.nttdata.transaction_account_ms.domain.models;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Getter
 @Setter
@@ -16,5 +17,7 @@ public class Account {
     private String clientName;
     private BigDecimal openingBalance;
     private boolean status;
+
+    private List<Movement> movements;
 
 }

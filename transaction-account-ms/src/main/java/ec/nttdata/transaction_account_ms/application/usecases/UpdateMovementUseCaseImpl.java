@@ -8,6 +8,9 @@ import ec.nttdata.transaction_account_ms.domain.result.ResultError;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+import java.util.Optional;
+
 @Component
 @RequiredArgsConstructor
 public class UpdateMovementUseCaseImpl implements UpdateMovementUseCase {
@@ -16,9 +19,10 @@ public class UpdateMovementUseCaseImpl implements UpdateMovementUseCase {
 
     @Override
     public Result<Movement> execute(Long id, Movement movement) {
-        if(accountRepository.existById(id)) {
+        Optional<Movement> optional = accountRepository.findById(id);
+        if(optional.isPresent()) {
 
-            Movement save = accountRepository.save(build(id, movement));
+            Movement save = accountRepository.save(build(id, movement, optional.get()));
             return new Result.Success<>(save);
         }
 
@@ -26,11 +30,12 @@ public class UpdateMovementUseCaseImpl implements UpdateMovementUseCase {
     }
 
 
-    private Movement build(Long id, Movement movement) {
+    private Movement build(Long id, Movement movement, Movement old) {
 
         Long setId = movement.getId() != null ? movement.getId() : id;
-
         return movement.toBuilder()
+                .balance(old.getBalance())
+                .dateTime(old.getDateTime())
                 .id(setId)
                 .build();
     }

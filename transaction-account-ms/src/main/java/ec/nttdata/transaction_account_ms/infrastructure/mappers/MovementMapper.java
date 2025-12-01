@@ -11,17 +11,15 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface MovementMapper {
-    @Mapping(target = "type", source = "type", qualifiedByName = "typeToString")
+    @Mapping(source = "account.id", target = "account")
+    @Mapping(source = "type", target = "type", qualifiedByName = "typeToString")
     Movement toDomain(MovementEntity entity);
     List<Movement> toDomains(List<MovementEntity> entities);
 
+    @Mapping(target = "account.id", source = "account")
     @Mapping(target = "type", source = "type", qualifiedByName = "stringToType")
     MovementEntity toEntity(Movement domain);
     List<MovementEntity> toEntities(List<Movement> domain);
-
-    /**
-     * Conversion a ResponseDTO
-     * */
 
 
     @Named("stringToType")

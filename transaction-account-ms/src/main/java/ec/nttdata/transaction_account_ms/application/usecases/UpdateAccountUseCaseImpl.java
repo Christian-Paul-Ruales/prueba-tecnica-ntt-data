@@ -8,6 +8,8 @@ import ec.nttdata.transaction_account_ms.domain.result.ResultError;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 @RequiredArgsConstructor
 public class UpdateAccountUseCaseImpl implements UpdateAccountUseCase {
@@ -16,21 +18,24 @@ public class UpdateAccountUseCaseImpl implements UpdateAccountUseCase {
 
     @Override
     public Result<Account> execute(Long id, Account account) {
-        if(accountRepository.existById(id)) {
+        Optional<Account> oldOptional = accountRepository.findById(id);
 
-            Account save = accountRepository.save(build(id, account));
+        if(oldOptional.isPresent()) {
+            Account old = oldOptional.get();
+
+            Account save = accountRepository.save(build(id, account, old));
             return new Result.Success<>(save);
         }
 
         return new Result.Failure<>(new ResultError("1", "Account not found"));
     }
 
-
-    private Account build(Long id, Account account) {
+    private Account build(Long id, Account account, Account old) {
 
         Long setId = account.getId() != null ? account.getId() : id;
 
         return account.toBuilder()
+                .number(old.getNumber())
                 .id(setId)
                 .build();
     }
