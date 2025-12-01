@@ -14,7 +14,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @RequiredArgsConstructor
 @RestController
@@ -70,13 +72,13 @@ public class AccountController {
     @GetMapping("/customer/{clientId}")
     public ResponseEntity<?> getAllByClientId(
             @PathVariable("clientId") Long clientId,
-            @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDateTime start,
-            @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDateTime end
+            @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate start,
+            @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDate end
 
             ) {
 
         return createReport.execute(
-                new CreateReportCommand(clientId, start, end)
+                new CreateReportCommand(clientId, start.atStartOfDay(), end.atTime(LocalTime.MAX))
         ).fold(
                 ResponseEntity::ok,
                 error -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
