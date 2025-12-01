@@ -34,3 +34,4 @@ management:
   endpoint:
     health:
       show-details: always
+      password: ${CONFIG_SERVER_PASS}
