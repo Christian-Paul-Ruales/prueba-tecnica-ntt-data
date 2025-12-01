@@ -1,22 +1,22 @@
 x-common-env: &common-env
   environment:
-    CONFIG_SERVER_HOST=config-server
-    CONFIG_SERVER_USER=configuser
-    CONFIG_SERVER_PASS=configpass
-    SPRING_EUREKA_HOST=discovery-server
-    SPRING_EUREKA_PASSWORD=eurekapass123
-    SPRING_EUREKA_PORT=8761
-    MARIADB_DATASOURCE_URL=jdbc:postgresql://db_client:3306/db_client
-    MARIADB_DATASOURCE_USERNAME=db_client
-    MARIADB_DATASOURCE_PASSWORD=apppassword
-    SPRING_CONFIG_HOST=localhost
-    SPRING_PROFILES_ACTIVE=default
+    CONFIG_SERVER_HOST: config-server
+    CONFIG_SERVER_USER: configuser
+    CONFIG_SERVER_PASS: configpass
+    SPRING_EUREKA_HOST: discovery-server
+    SPRING_EUREKA_PASSWORD: eurekapass123
+    SPRING_EUREKA_PORT: 8761
+    MARIADB_DATASOURCE_URL: jdbc:postgresql://db-client:3306/db_client
+    MARIADB_DATASOURCE_USERNAME: db_client
+    MARIADB_DATASOURCE_PASSWORD: apppassword
+    SPRING_CONFIG_HOST: localhost
+    SPRING_PROFILES_ACTIVE: docker
 
 
 services:
-  db_client:
+  db-client:
     image: mariadb:12.0.2
-    container_name: db_client
+    container_name: db-client
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: 12345678
@@ -25,10 +25,12 @@ services:
       MYSQL_PASSWORD: apppassword
     ports:
       - "3306:3306"
+    networks:
+      - microservices-network
 
-  db_transaction:
+  db-transaction:
     image: postgres:17.0-alpine3.20
-    container_name: db_transaction
+    container_name: db-transaction
     restart: always
     environment:
       POSTGRES_DB: db_transaction
@@ -39,20 +41,106 @@ services:
     expose:
       - 5436
     command: -p 5436
-  kafka:
-    image: apache/kafka:4.1.1
-    container_name: kafka-kraft
-    environment:
-      KAFKA_PROCESS_ROLES: "broker,controller"
-      KAFKA_NODE_ID: "1"
-      KAFKA_CONTROLLER_QUORUM_VOTERS: "1@kafka:9093"
-      KAFKA_LISTENERS: "PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093"
-      KAFKA_CONTROLLER_LISTENER_NAMES: "CONTROLLER"
-      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://localhost:9092"
-      KAFKA_LOG_DIRS: "/kafka-logs"
-      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+    networks:
+      - microservices-network
+
+  config-server:
+    container_name: config-server
+    build:
+      context: ./config-server
+      dockerfile: Dockerfile
     ports:
-      - "9092:9092"
+      - "8888:8888"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8888/actuator/health || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
+    networks:
+      - microservices-network
+    <<: *common-env
 
+  discovery-server:
+    container_name: discovery-server
+    build:
+      context: ./discovery-server
+      dockerfile: Dockerfile
+    ports:
+      - "8761:8761"
+    networks:
+      - microservices-network
+    <<: *common-env
 
+  api-gateway:
+    container_name: api-gateway
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/actuator/health || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
+    networks:
+      - microservices-network
+    <<: *common-env
+    depends_on:
+      config-server:
+        condition: service_healthy
+      discovery-server:
+        condition: service_started
 
+  person-user:
+    container_name: person-user
+    build:
+      context: ./person-user-ms
+      dockerfile: Dockerfile
+    ports:
+      - "8079:8079"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8079/actuator/health || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
+    networks:
+      - microservices-network
+    <<: *common-env
+    depends_on:
+      config-server:
+        condition: service_healthy
+      discovery-server:
+        condition: service_started
+      api-gateway:
+        condition: service_healthy
+
+  transaction-account:
+    container_name: transaction-account
+    build:
+      context: ./transaction-account-ms
+      dockerfile: Dockerfile
+    ports:
+      - "8078:8078"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8078/actuator/health || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
+    networks:
+      - microservices-network
+    <<: *common-env
+    depends_on:
+      config-server:
+        condition: service_healthy
+      discovery-server:
+        condition: service_started
+      api-gateway:
+        condition: service_healthy
+
+networks:
+  microservices-network:

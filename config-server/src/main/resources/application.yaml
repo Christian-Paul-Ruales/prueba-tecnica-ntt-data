@@ -26,12 +26,14 @@ spring:
       name: ${CONFIG_SERVER_USER}
       password: ${CONFIG_SERVER_PASS}
 
+
 management:
   endpoints:
     web:
       exposure:
-        include: health,info,refresh
-  endpoint:
-    health:
-      show-details: always
-      password: ${CONFIG_SERVER_PASS}
+        include: health,info
+  health:
+    clientConfigServer:
+      enabled: false
+    discovery:
+      enabled: false
