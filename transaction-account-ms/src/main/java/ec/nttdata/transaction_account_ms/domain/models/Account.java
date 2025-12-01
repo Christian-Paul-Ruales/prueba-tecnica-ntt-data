@@ -8,6 +8,8 @@ import java.util.List;
 @Getter
 @Setter
 @Builder(toBuilder = true)
+@AllArgsConstructor
+@NoArgsConstructor
 public class Account {
 
     private Long id;
@@ -19,5 +21,6 @@ public class Account {
     private boolean status;
 
     private List<Movement> movements;
+
 
 }

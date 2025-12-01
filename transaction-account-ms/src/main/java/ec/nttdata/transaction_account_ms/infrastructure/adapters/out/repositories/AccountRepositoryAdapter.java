@@ -8,7 +8,6 @@ import ec.nttdata.transaction_account_ms.infrastructure.persistence.jpa.AccountR
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 

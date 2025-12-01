@@ -27,7 +27,13 @@ public class CreateReportAccountMovementsUseCaseImpl
 
         List<Account> accountsWithMovements = accountList.stream().map(
                 account -> account.toBuilder()
-                        .movements(movementRepository.findByAccountDateTimeBetween(account.getId(), command.start(), command.end()))
+                        .movements(
+                                movementRepository.
+                                        findByAccountDateTimeBetween(
+                                                account.getId(),
+                                                command.start()
+                                                , command.end())
+                        )
                         .build()
         )
         .toList();

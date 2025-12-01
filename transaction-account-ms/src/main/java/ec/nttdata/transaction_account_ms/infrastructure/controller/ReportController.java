@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("v1/movements")
+@RequestMapping("v1/report")
 public class ReportController {
 
 
