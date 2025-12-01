@@ -17,3 +17,9 @@ spring:
       password: ${CONFIG_SERVER_PASS}
       profile: default
       fail-fast: true
+
+logging:
+  level:
+    com.netflix.discovery: DEBUG
+    org.springframework.cloud: DEBUG
+    org.springframework.cloud.config: DEBUG
