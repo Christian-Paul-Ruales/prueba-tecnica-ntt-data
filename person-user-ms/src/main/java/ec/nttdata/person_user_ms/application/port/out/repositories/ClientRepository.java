@@ -1,4 +1,4 @@
-package ec.nttdata.person_user_ms.application.port.out;
+package ec.nttdata.person_user_ms.application.port.out.repositories;
 
 import ec.nttdata.person_user_ms.domain.models.Client;
 

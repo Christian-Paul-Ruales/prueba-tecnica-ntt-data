@@ -1,8 +1,7 @@
 package ec.nttdata.person_user_ms.application.usecases;
 
-import ec.nttdata.person_user_ms.application.port.in.usecases.CreateClientUseCase;
 import ec.nttdata.person_user_ms.application.port.in.usecases.UpdateClientUseCase;
-import ec.nttdata.person_user_ms.application.port.out.ClientRepository;
+import ec.nttdata.person_user_ms.application.port.out.repositories.ClientRepository;
 import ec.nttdata.person_user_ms.domain.models.Client;
 import ec.nttdata.person_user_ms.domain.result.Result;
 import ec.nttdata.person_user_ms.domain.result.ResultError;

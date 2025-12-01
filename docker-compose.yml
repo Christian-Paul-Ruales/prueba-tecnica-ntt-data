@@ -26,14 +26,18 @@ services:
     ports:
       - "3306:3306"
 
-CONFIG_SERVER_HOST=localhost
-CONFIG_SERVER_USER=configuser
-CONFIG_SERVER_PASS=configpass
-SPRING_EUREKA_HOST=localhost
-SPRING_EUREKA_PASSWORD=eurekapass123
-SPRING_EUREKA_PORT=8761
-SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:3306/example
-SPRING_DATASOURCE_USERNAME=ejemplo
-SPRING_DATASOURCE_PASSWORD=ejemplo
-SPRING_CONFIG_HOST=localhost
-SPRING_PROFILES_ACTIVE=default
+  db_transaction:
+    image: postgres:17.0-alpine3.20
+    container_name: db_transaction
+    restart: always
+    environment:
+      POSTGRES_DB: db_transaction
+      POSTGRES_USER: db_transaction
+      POSTGRES_PASSWORD: apppassword
+    ports:
+      - "5436:5436"
+    expose:
+      - 5436
+    command: -p 5436
+
+
