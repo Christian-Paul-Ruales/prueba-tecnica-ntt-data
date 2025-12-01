@@ -53,6 +53,15 @@ public class MovementRepositoryAdapter implements MovementRepository {
     }
 
     @Override
+    public List<Movement> findByAccountDateTimeBetween(Long accountId,LocalDateTime start, LocalDateTime end) {
+
+        return repositoryJpa.findMovementsDateTimeBetween(accountId, start, end)
+                .stream()
+                .map(mapper::toDomain)
+                .toList();
+    }
+
+    @Override
     public boolean existById(Long id) {
         return repositoryJpa.existsById(id);
     }

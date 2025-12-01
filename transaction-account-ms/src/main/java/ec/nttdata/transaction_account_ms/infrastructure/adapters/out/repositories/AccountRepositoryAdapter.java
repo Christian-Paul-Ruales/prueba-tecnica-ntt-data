@@ -54,11 +54,10 @@ public class AccountRepositoryAdapter implements AccountRepository {
 
     @Override
     public List<Account> findByClientIdAndStatusTrue(
-            Long clientId,
-            LocalDateTime start,
-            LocalDateTime end
+            Long clientId
+
     ) {
-        return repositoryJpa.findByClientIdAndStatusTrue(start, end, clientId)
+        return repositoryJpa.findByClientIdAndStatusTrue(clientId)
                 .stream()
                 .map(mapper::toDomain)
                 .toList();

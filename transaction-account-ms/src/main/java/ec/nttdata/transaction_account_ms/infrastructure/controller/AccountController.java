@@ -70,15 +70,15 @@ public class AccountController {
     @GetMapping("/customer/{clientId}")
     public ResponseEntity<?> getAllByClientId(
             @PathVariable("clientId") Long clientId,
-            @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy/MM/dd")LocalDateTime start,
-            @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy/MM/dd")LocalDateTime end
+            @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDateTime start,
+            @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDateTime end
 
             ) {
 
         return createReport.execute(
                 new CreateReportCommand(clientId, start, end)
         ).fold(
-                clients -> ResponseEntity.ok(responseMapper.toResponses(clients)),
+                ResponseEntity::ok,
                 error -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                         .body(error)
         );

@@ -12,6 +12,7 @@ public interface MovementRepository {
     List<Movement> findAll();
     Optional<Movement> findById(Long id);
     List<Movement> findByDateTimeBetween(LocalDateTime start, LocalDateTime end);
+    List<Movement> findByAccountDateTimeBetween(Long accountId,LocalDateTime start, LocalDateTime end);
     boolean existById(Long id);
     void deleteById(Long id);
 

@@ -10,16 +10,7 @@ import java.util.List;
 
 public interface AccountRepositoryJpa extends JpaRepository<AccountEntity, Long> {
 
-    @Query("""
-            SELECT p
-                FROM AccountEntity p
-                LEFT JOIN FETCH p.movements h
-                WHERE p.clientId = :clientId AND p.status = true
-                AND h.dateTime BETWEEN :start AND :end
-            """)
     List<AccountEntity> findByClientIdAndStatusTrue(
-            @Param("start") LocalDateTime start,
-            @Param("end") LocalDateTime end,
             @Param("clientId") Long clientId
     );
 

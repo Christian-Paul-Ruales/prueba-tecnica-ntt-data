@@ -14,8 +14,6 @@ public interface AccountRepository {
     boolean existById(Long id);
     void deleteById(Long id);
     List<Account> findByClientIdAndStatusTrue(
-            Long clientId,
-            LocalDateTime start,
-            LocalDateTime end
+            Long clientId
     );
 }

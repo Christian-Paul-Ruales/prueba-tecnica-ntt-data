@@ -39,8 +39,5 @@ public class AccountEntity {
     @Column(nullable = false)
     private boolean status;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "")
-    private List<MovementEntity> movements;
-
 
 }
