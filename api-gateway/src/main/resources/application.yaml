@@ -1,0 +1,19 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+
+  profiles:
+    active: default
+  config:
+    import: "optional:configserver:"
+  cloud:
+    config:
+      uri: http://${CONFIG_SERVER_HOST}:8888
+      name: api-gateway
+      username: ${CONFIG_SERVER_USER}
+      password: ${CONFIG_SERVER_PASS}
+      profile: default
+      fail-fast: true
