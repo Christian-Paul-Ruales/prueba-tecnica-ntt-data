@@ -26,7 +26,6 @@ public class AccountController {
 
     private final GetAccountUseCase getAccountUseCase;
     private final GetAllAccountsUseCase getAllClientsUseCase;
-    private final CreateReportAccountMovementsUseCase createReport;
     private final CreateAccountUseCase createAccountUseCase;
     private final UpdateAccountUseCase updateAccountUseCase;
     private final DeleteAccountUseCase deleteAccountUseCase;
@@ -52,35 +51,6 @@ public class AccountController {
 
         return getAllClientsUseCase.execute().fold(
                 accounts -> ResponseEntity.ok(responseMapper.toResponses(accounts)),
-                error -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                        .body(error)
-        );
-    }
-
-    @Operation(
-            summary = "Get account clients",
-            description = "Get account clients"
-    )
-    @ApiResponse(
-            responseCode = "200",
-            description = "All accounts"
-    )
-    @ApiResponse(
-            responseCode = "500",
-            description = "An error occurred"
-    )
-    @GetMapping("/customer/{clientId}")
-    public ResponseEntity<?> getAllByClientId(
-            @PathVariable("clientId") Long clientId,
-            @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate start,
-            @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDate end
-
-            ) {
-
-        return createReport.execute(
-                new CreateReportCommand(clientId, start.atStartOfDay(), end.atTime(LocalTime.MAX))
-        ).fold(
-                ResponseEntity::ok,
                 error -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                         .body(error)
         );

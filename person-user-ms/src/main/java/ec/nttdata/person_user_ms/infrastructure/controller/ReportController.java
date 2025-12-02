@@ -2,7 +2,6 @@ package ec.nttdata.person_user_ms.infrastructure.controller;
 
 import ec.nttdata.person_user_ms.application.port.in.usecases.*;
 import ec.nttdata.person_user_ms.infrastructure.dtos.ClientRequestDTO;
-import ec.nttdata.person_user_ms.infrastructure.dtos.CreateAccountRequestDTO;
 import ec.nttdata.person_user_ms.infrastructure.mappers.RequestMapper;
 import ec.nttdata.person_user_ms.infrastructure.mappers.ResponseMapper;
 import io.swagger.v3.oas.annotations.Operation;
@@ -15,14 +14,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("v1/customers")
-public class ClientController {
+@RequestMapping("v1/report")
+public class ReportController {
 
 
     private final GetClientUseCase getClientUseCase;
     private final GetAllClientsUseCase getAllClientsUseCase;
     private final CreateClientUseCase createClientUseCase;
-    private final CreateAccountClientUseCase createAccountClientUseCase;
     private final UpdateClientUseCase updateClientUseCase;
     private final DeleteClientUseCase deleteClientUseCase;
 
@@ -99,32 +97,6 @@ public class ClientController {
                                 .body(error)
                 );
     }
-
-
-    @Operation(
-            summary = "Create account",
-            description = "Create account"
-    )
-    @ApiResponse(
-            responseCode = "201",
-            description = "Create account"
-    )
-    @ApiResponse(
-            responseCode = "500",
-            description = "An error occurred"
-    )
-    @PutMapping("/account/{id}")
-    public ResponseEntity<?> createAccount(@PathVariable("id") Long id, @RequestBody CreateAccountRequestDTO createAccountRequestDTO) {
-        return createAccountClientUseCase.execute(id, createAccountRequestDTO.type(), createAccountRequestDTO.openingBalance())
-                .fold(
-                        client -> ResponseEntity.status(HttpStatus.CREATED)
-                                .body(responseMapper.toResponse(client)),
-                        error -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                                .body(error)
-                );
-    }
-
-
 
     @Operation(
             summary = "Update client",

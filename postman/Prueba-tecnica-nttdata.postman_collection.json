@@ -1,0 +1,570 @@
+{
+	"info": {
+		"_postman_id": "b6292051-f929-41ef-a62a-bbc810655fa4",
+		"name": "Prueba-tecnica-nttdata",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10142921"
+	},
+	"item": [
+		{
+			"name": "PERSON-CLIENT",
+			"item": [
+				{
+					"name": "CREATE CLIENT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Mariana Oña\",\n    \"gender\": \"F\",\n    \"identification\": \"1222661110\",\n    \"address\": \"Quito tenis\",\n    \"phone\": \"0984011231\",\n    \"password\": \"Clave123*\",\n    \"status\": true\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/person-user-ms/api/v1/customers",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"person-user-ms",
+								"api",
+								"v1",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE CLIENT",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Elizabeth Alarcon\",\n    \"gender\": \"F\",\n    \"identification\": \"1234561101\",\n    \"address\": \"La Marin\",\n    \"phone\": \"0994333231\",\n    \"password\": \"Modificada123*\",\n    \"status\": false\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/person-user-ms/api/v1/customers/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"person-user-ms",
+								"api",
+								"v1",
+								"customers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Cristobal Colon\",\n    \"gender\": \"M\",\n    \"identification\": \"12345666\",\n    \"address\": \"Macopmes Unidas\",\n    \"phone\": \"0994333234\",\n    \"password\": \"ChristianGuapo123*\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/person-user-ms/api/v1/customers",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"person-user-ms",
+								"api",
+								"v1",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET CLIENT BY ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Cristobal Colon\",\n    \"gender\": \"M\",\n    \"identification\": \"12345666\",\n    \"address\": \"Macopmes Unidas\",\n    \"phone\": \"0994333234\",\n    \"password\": \"ChristianGuapo123*\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/person-user-ms/api/v1/customers/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"person-user-ms",
+								"api",
+								"v1",
+								"customers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE CLIENT BY ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Cristobal Colon\",\n    \"gender\": \"M\",\n    \"identification\": \"12345666\",\n    \"address\": \"Macopmes Unidas\",\n    \"phone\": \"0994333234\",\n    \"password\": \"ChristianGuapo123*\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/person-user-ms/api/v1/customers/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"person-user-ms",
+								"api",
+								"v1",
+								"customers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MOVEMENT-ACCOUNT",
+			"item": [
+				{
+					"name": "CREATE ACOUNT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"CORRIENTE\",\n    \"clientId\": 6,\n    \"clientName\": \"Mariana Oña\",\n    \"openingBalance\": 700012300.11,\n    \"status\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/transaction-account-ms/api/v1/accounts",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"transaction-account-ms",
+								"api",
+								"v1",
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL ACCOUNTS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/transaction-account-ms/api/v1/accounts",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"transaction-account-ms",
+								"api",
+								"v1",
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ACCOUNTS BY ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/transaction-account-ms/api/v1/accounts/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"transaction-account-ms",
+								"api",
+								"v1",
+								"accounts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE ACCOUNT",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"AHORROS\",\n    \"clientId\": 1,\n    \"clientName\": \"Christian ruales\",\n    \"openingBalance\": 10000.35,\n    \"status\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/transaction-account-ms/api/v1/accounts/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"transaction-account-ms",
+								"api",
+								"v1",
+								"accounts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE ACCOUNT BY ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Cristobal Colon\",\n    \"gender\": \"M\",\n    \"identification\": \"12345666\",\n    \"address\": \"Macopmes Unidas\",\n    \"phone\": \"0994333234\",\n    \"password\": \"ChristianGuapo123*\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/transaction-account-ms/api/v1/accounts/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"transaction-account-ms",
+								"api",
+								"v1",
+								"accounts",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE DEPOSIT MOVEMENT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"DEPOSITO\",\n    \"value\": 1.00,\n    \"account\": 8,\n    \"status\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/transaction-account-ms/api/v1/movements",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"transaction-account-ms",
+								"api",
+								"v1",
+								"movements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE DEBIT MOVEMENT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"RETIRO\",\n    \"value\": 13.99,\n    \"account\": 1,\n    \"status\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/transaction-account-ms/api/v1/movements",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"transaction-account-ms",
+								"api",
+								"v1",
+								"movements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "REPORT",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Cristobal Colon\",\n    \"gender\": \"M\",\n    \"identification\": \"12345666\",\n    \"address\": \"Macopmes Unidas\",\n    \"phone\": \"0994333234\",\n    \"password\": \"ChristianGuapo123*\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/transaction-account-ms/api/v1/report/1?startDate=2025-11-10&endDate=2025-12-15",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"transaction-account-ms",
+								"api",
+								"v1",
+								"report",
+								"1"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "2025-11-10"
+								},
+								{
+									"key": "endDate",
+									"value": "2025-12-15"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL MOVEMENTS",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Cristobal Colon\",\n    \"gender\": \"M\",\n    \"identification\": \"12345666\",\n    \"address\": \"Macopmes Unidas\",\n    \"phone\": \"0994333234\",\n    \"password\": \"ChristianGuapo123*\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/transaction-account-ms/api/v1/movements",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"transaction-account-ms",
+								"api",
+								"v1",
+								"movements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL BY ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/transaction-account-ms/api/v1/movements/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"transaction-account-ms",
+								"api",
+								"v1",
+								"movements",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE MOVEMENT",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"DEPOSITO\",\n    \"value\": 100,\n    \"account\": 1,\n    \"status\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/transaction-account-ms/api/v1/movements/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"transaction-account-ms",
+								"api",
+								"v1",
+								"movements",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DELETE MOVEMENT BY ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Cristobal Colon\",\n    \"gender\": \"M\",\n    \"identification\": \"12345666\",\n    \"address\": \"Macopmes Unidas\",\n    \"phone\": \"0994333234\",\n    \"password\": \"ChristianGuapo123*\"\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/transaction-account-ms/api/v1/movements/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"transaction-account-ms",
+						"api",
+						"v1",
+						"movements",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Config-server",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "configpass",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "configuser",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/actuator/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"actuator",
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
